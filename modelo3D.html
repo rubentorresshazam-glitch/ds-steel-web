@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modelos 3D - DS Steel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ===== BASE ===== */
+body{
+    font-family:'Inter',sans-serif;
+    background:linear-gradient(135deg,#1a1a1d,#2c2c34);
+    color:#f5f5f5;
+    overflow-x:hidden;
+    line-height:1.6;
+}
+
+/* ===== NAV ===== */
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:16px 50px;
+    display:flex;
+    justify-content:flex-start;
+    gap:120px;
+    align-items:center;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(12px);
+    z-index:1000;
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+nav .logo{
+    font-size:1.8rem;
+    font-weight:700;
+    color:#ffd84d;
+    letter-spacing:1px;
+}
+
+nav ul{display:flex;gap:30px;list-style:none}
+nav a{
+    color:#eaeaea;
+    text-decoration:none;
+    font-weight:500;
+    font-size:1rem;
+    transition:.2s;
+}
+nav a:hover{color:#ffd84d}
+
+/* ===== HAMBURGUESA ===== */
+.menu-btn{display:none;width:34px;height:26px;flex-direction:column;justify-content:space-between;cursor:pointer;z-index:1100}
+.menu-btn span{height:4px;width:100%;background:#ffd84d;border-radius:4px;transition:.3s}
+.menu-btn.active span:nth-child(1){transform:rotate(45deg) translateY(10px)}
+.menu-btn.active span:nth-child(2){opacity:0}
+.menu-btn.active span:nth-child(3){transform:rotate(-45deg) translateY(-10px)}
+
+@media(max-width:768px){
+    nav{padding:12px 18px;gap:18px}
+    .menu-btn{display:flex}
+    nav ul{
+        position:fixed;top:0;left:-100%;width:75%;height:100vh;
+        background:rgba(0,0,0,.95);backdrop-filter:blur(12px);
+        padding-top:110px;flex-direction:column;gap:32px;
+        align-items:center;transition:.35s ease;z-index:1050;
+    }
+    nav ul.show{left:0}
+}
+
+/* ===== SECCIONES ===== */
+.section{
+    margin-top:160px;
+    text-align:center;
+    padding:40px 20px 20px;
+}
+
+/* ===== TITULOS CON GRADIENTE ===== */
+.section-title{
+    font-family:'Playfair Display',serif;
+    font-size:2.6rem;
+    letter-spacing:1px;
+    background: linear-gradient(90deg, #00bfff, #ffd84d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display:inline-block;
+    border-bottom:3px solid #ffd84d;
+    margin-bottom:20px;
+}
+
+@media(max-width:600px){
+    .section-title{font-size:2rem}
+}
+
+/* ===== SLIDER ===== */
+.slider{
+    margin:40px auto 130px;
+    max-width:1100px;
+    position:relative;
+    overflow:hidden;
+    border-radius:18px;
+    min-height:540px;
+    background:#111;
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition:.8s;
+    text-align:center;
+}
+
+.slide.active{
+    opacity:1;
+    z-index:2;
+}
+
+/* ===== VIDEO ===== */
+.slide video{
+    width:100%;
+    height:100%;
+    object-fit:contain; /* <- mantiene todo el video sin recortar */
+    background:#111;
+    border-radius:18px;
+    box-shadow:0 25px 55px rgba(0,0,0,.7);
+}
+
+/* ===== BOTONES ===== */
+.btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(0,0,0,.55);
+    border:1px solid rgba(255,216,77,.35);
+    color:#ffd84d;
+    font-size:2.2rem;
+    padding:8px 16px;
+    cursor:pointer;
+    border-radius:50%;
+    z-index:10;
+    transition:.25s;
+    backdrop-filter:blur(6px);
+}
+.btn:hover{background:rgba(0,0,0,.9);border-color:#ffd84d}
+.prev{left:18px}
+.next{right:18px}
+
+/* ===== DOTS ===== */
+.dots{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:14px;
+}
+.dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#555;
+    cursor:pointer;
+    transition:.3s;
+}
+.dot.active{
+    background:#ffd84d;
+}
+
+@media(max-width:600px){
+    .slider{max-width:100%;padding:0 10px;min-height:420px}
+    .slide video{max-height:420px}
+}
+
+/* ===== CEO SECTION ===== */
+.ceo-section{
+    background:#1f1f28;
+    color:#ffd84d;
+    padding:60px 20px;
+    text-align:center;
+    border-radius:18px;
+    margin:60px auto;
+    max-width:1000px;
+}
+.ceo-section h2{
+    font-family:'Playfair Display',serif;
+    font-size:2.4rem;
+    margin-bottom:20px;
+    background: linear-gradient(90deg, #00bfff, #ffd84d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.ceo-section p{
+    font-size:1.1rem;
+    color:#eaeaea;
+    line-height:1.8;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
+    <div class="logo">DS Steel</div>
+    <ul id="menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="ceo.html">Sobre Nosotros</a></li>
+        <li><a href="proyectos.html">Diseños y Proyectos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+</nav>
+
+<!-- ===== ESTRUCTURAS ===== -->
+<div class="section"><h2 class="section-title">ESTRUCTURAS</h2></div>
+
+<section class="slider">
+<button class="btn prev">&#10094;</button>
+<button class="btn next">&#10095;</button>
+
+<div class="slide active"><video muted loop playsinline preload="none"><source src="estructuras/estructura1.mp4"></video></div>
+<div class="slide"><video muted loop playsinline preload="none"><source src="estructuras/estructura2.mp4"></video></div>
+<div class="slide"><video muted loop playsinline preload="none"><source src="estructuras/estructura3.mp4"></video></div>
+<div class="slide"><video muted loop playsinline preload="none"><source src="estructuras/estructura4.mp4"></video></div>
+<div class="slide"><video muted loop playsinline preload="none"><source src="estructuras/estructura5.mp4"></video></div>
+<div class="slide"><video muted loop playsinline preload="none"><source src="estructuras/estructura6.mp4"></video></div>
+
+<div class="dots"></div>
+</section>
+
+<!-- ===== RENDERIZADO ===== -->
+<div class="section"><h2 class="section-title">RENDERIZADO</h2></div>
+
+<section class="slider">
+<button class="btn prev">&#10094;</button>
+<button class="btn next">&#10095;</button>
+
+<div class="slide active"><video muted loop playsinline preload="none"><source src="modelos/casa1 3D.mp4"></video></div>
+<div class="slide"><video muted loop playsinline preload="none"><source src="modelos/casa2 3D.mp4"></video></div>
+<div class="slide"><video muted loop playsinline preload="none"><source src="modelos/casa3 3D.mp4"></video></div>
+<div class="slide"><video muted loop playsinline preload="none"><source src="modelos/casa4 3D.mp4"></video></div>
+<div class="slide"><video muted loop playsinline preload="none"><source src="modelos/casa5 3D.mp4"></video></div>
+
+<div class="dots"></div>
+</section>
+
+<!-- ===== CEO ===== -->
+<div class="ceo-section">
+    <h2>Sobre Nuestro CEO</h2>
+    <p>Con años de experiencia en diseño estructural y modelado 3D, nuestro CEO lidera DS Steel con pasión, innovación y compromiso con la calidad. Cada proyecto que emprendemos refleja nuestra atención al detalle y la excelencia en la construcción y visualización de estructuras.</p>
+</div>
+
+<script>
+document.querySelectorAll('.slider').forEach(slider=>{
+    let index=0;
+    const slides=slider.querySelectorAll('.slide');
+    const videos=slider.querySelectorAll('video');
+    const dotsContainer = slider.querySelector('.dots');
+
+    slides.forEach((_,i)=>{
+        const dot=document.createElement('div');
+        dot.className='dot';
+        if(i===0) dot.classList.add('active');
+        dot.onclick=()=>show(i);
+        dotsContainer.appendChild(dot);
+    });
+    const dots = dotsContainer.querySelectorAll('.dot');
+
+    function show(i){
+        slides.forEach((s,idx)=>{
+            s.classList.toggle('active',idx===i);
+            videos[idx].pause();
+        });
+        dots.forEach((d,idx)=>d.classList.toggle('active',idx===i));
+        videos[i].play().catch(()=>{});
+        index=i;
+    }
+
+    slider.querySelector('.next').onclick=()=>show((index+1)%slides.length);
+    slider.querySelector('.prev').onclick=()=>show((index-1+slides.length)%slides.length);
+
+    let startX=0;
+    slider.addEventListener('touchstart',e=>startX=e.touches[0].clientX);
+    slider.addEventListener('touchend',e=>{
+        const endX=e.changedTouches[0].clientX;
+        if(endX < startX - 50) slider.querySelector('.next').click();
+        if(endX > startX + 50) slider.querySelector('.prev').click();
+    });
+
+    show(0);
+});
+
+const btn=document.getElementById("menuBtn");
+const menu=document.getElementById("menu");
+btn.onclick=()=>{menu.classList.toggle("show");btn.classList.toggle("active");};
+</script>
+
+</body>
+</html>

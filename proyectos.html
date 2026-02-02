@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Diseños y Proyectos - DS Steel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #000; /* Fondo negro */
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(18,18,18,0.95);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 60px;
+    padding: 15px 40px;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+nav .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7em;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    color: #ddd;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95em;
+    letter-spacing: 0.5px;
+    position: relative;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover { color: #fff; }
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: 0.3s;
+}
+nav ul li a:hover::after { width: 100%; }
+
+/* ===== BOTON HAMBURGUESA ===== */
+.menu-btn {
+    display:none;
+    font-size:32px;
+    color: #ffd84d; /* amarillo */
+    cursor:pointer;
+}
+
+/* ===== HEADER ===== */
+header {
+    text-align:center;
+    padding:120px 20px 30px 20px;
+    font-family:'Playfair Display', serif;
+    font-size:2em;
+    background: linear-gradient(90deg, #00ffff, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ===== MAIN ===== */
+main { max-width: 1000px; margin:auto; padding: 20px; }
+
+.carpeta { margin-bottom: 100px; }
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 15px;
+    background: #1e1e1e;
+    box-shadow:0 10px 25px rgba(0,0,0,0.7);
+    aspect-ratio: 16 / 9;
+}
+
+.slider-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display:block;
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+    position: absolute;
+    top:0;
+    left:0;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.slider-container img.active {
+    opacity: 1;
+    position: relative;
+}
+
+.btn {
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.2);
+    color:#fff;
+    border:none;
+    font-size:3em;
+    padding:10px 16px;
+    cursor:pointer;
+    border-radius:50%;
+    transition:0.3s;
+    z-index:10;
+}
+.btn:hover { background: rgba(255,255,255,0.5); }
+.prev { left: 20px; }
+.next { right: 20px; }
+
+.indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.indicator.active { background: #fff; }
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+    nav{ padding:15px 20px; gap:20px; justify-content:space-between; }
+    .menu-btn{ display:block; }
+    nav .logo{ position:absolute; left:50%; transform:translateX(-50%); }
+    nav ul{
+        position:fixed;
+        top:0;
+        right:-100%;
+        width:65%;
+        height:100vh;
+        background:#000;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        gap:30px;
+        transition:.3s;
+    }
+    nav ul.active{ right:0; }
+    header{ font-size:1.6em; padding-top:110px; }
+    .slider-container{ min-height:260px; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <span class="menu-btn" onclick="toggleMenu()">☰</span>
+    <a href="index.html" class="logo">DS Steel</a>
+    <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="ceo.html">Sobre Nosotros</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="modelo3D.html">Modelos 3D</a></li>
+    </ul>
+</nav>
+
+<header>Diseños y Proyectos</header>
+
+<main>
+<div class="carpeta"><div class="slider-container" id="slider1"></div><div class="indicators" id="indicators1"></div></div>
+<div class="carpeta"><div class="slider-container" id="slider2"></div><div class="indicators" id="indicators2"></div></div>
+<div class="carpeta"><div class="slider-container" id="slider3"></div><div class="indicators" id="indicators3"></div></div>
+<div class="carpeta"><div class="slider-container" id="slider4"></div><div class="indicators" id="indicators4"></div></div>
+<div class="carpeta"><div class="slider-container" id="slider5"></div><div class="indicators" id="indicators5"></div></div>
+<div class="carpeta"><div class="slider-container" id="slider6"></div><div class="indicators" id="indicators6"></div></div>
+</main>
+
+<script>
+function toggleMenu(){
+    document.querySelector("nav ul").classList.toggle("active");
+}
+
+const sliders = {
+    slider1: Array.from({length:21},(_,i)=>`diseno1/diseno y proyecto-${i+1}.jpg`),
+    slider2: Array.from({length:15},(_,i)=>`diseno2/diseno-${i+1}.jpg`),
+    slider3: Array.from({length:23},(_,i)=>`diseno3/galeria-${i+1}.jpg`),
+    slider4: Array.from({length:9},(_,i)=>`diseno4/imagen${i+1}.jpeg`),
+    slider5: Array.from({length:5},(_,i)=>`diseno5/img${i+1}.jpeg`),
+    slider6: Array.from({length:17},(_,i)=>`diseno6/home${i+1}.jpeg`)
+};
+
+const indexes = { slider1:0, slider2:0, slider3:0, slider4:0, slider5:0, slider6:0 };
+
+for (let sliderId in sliders) {
+    const container = document.getElementById(sliderId);
+
+    sliders[sliderId].forEach((src,i)=>{
+        const img=document.createElement('img');
+        img.src=src;
+        if(i===0) img.classList.add('active');
+        container.appendChild(img);
+    });
+
+    const indicators=document.getElementById('indicators'+sliderId.slice(-1));
+    sliders[sliderId].forEach((_,i)=>{
+        const dot=document.createElement('div');
+        dot.className='indicator'+(i===0?' active':'');
+        dot.onclick=()=>{ indexes[sliderId]=i; showSlide(sliderId); };
+        indicators.appendChild(dot);
+    });
+
+    const prev=document.createElement('button');
+    prev.className='btn prev';
+    prev.innerHTML='&#10094;';
+    prev.onclick=()=>prevSlide(sliderId);
+
+    const next=document.createElement('button');
+    next.className='btn next';
+    next.innerHTML='&#10095;';
+    next.onclick=()=>nextSlide(sliderId);
+
+    container.append(prev,next);
+}
+
+function showSlide(id){
+    const imgs=document.querySelectorAll(`#${id} img`);
+    imgs.forEach((img,i)=>img.classList.toggle('active',i===indexes[id]));
+    [...document.getElementById('indicators'+id.slice(-1)).children]
+        .forEach((d,i)=>d.classList.toggle('active',i===indexes[id]));
+}
+
+function nextSlide(id){ indexes[id]=(indexes[id]+1)%sliders[id].length; showSlide(id); }
+function prevSlide(id){ indexes[id]=(indexes[id]-1+sliders[id].length)%sliders[id].length; showSlide(id); }
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+
+</body>
+</html>

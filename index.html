@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DS Steel | Construcción en Steel Framing</title>
+<meta name="description" content="DS Steel - Especialistas en Steel Framing. Estructuras modernas, eficientes y duraderas.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<style>
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  overflow-x:hidden;
+  font-family:'Inter',sans-serif;
+  background:#0e1114;
+  color:#fff;
+}
+
+/* INTRO */
+#intro{
+  position:fixed;
+  inset:0;
+  background:black;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  transition:opacity 1.2s ease, visibility 1.2s ease;
+}
+#intro video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-1;
+}
+#intro.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:16px 60px;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(10px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  z-index:1000;
+}
+
+.logo{
+  font-family:'Playfair Display',serif;
+  font-size:24px;
+  font-weight:700;
+  color:white;
+  text-decoration:none;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:30px;
+  margin:0 auto;
+  padding:0;
+}
+
+nav ul li a{
+  color:#e5e5e5;
+  text-decoration:none;
+  font-weight:500;
+}
+nav ul li a:hover{color:#ffd84d;}
+
+.menu-btn{
+  display:none;
+  font-size:30px;
+  color:white;
+  cursor:pointer;
+  transition:.3s;
+  z-index:1002; /* botón arriba del menú */
+}
+.menu-btn.active{
+  transform:rotate(90deg);
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  position:relative;
+}
+.hero video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.55));
+}
+.hero-content{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  z-index:2;
+  animation:fadeUp 1.5s ease;
+  padding:0 20px;
+}
+
+/* TITULO HERO */
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:60px;
+  font-weight:800;
+  background:none;
+  color: #ffd700; /* amarillo sólido */
+  letter-spacing:2px;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.35);
+  margin-bottom:15px;
+}
+.hero-subtitle{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  font-weight:600;
+  color:#ffd700; /* amarillo sólido */
+  text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  margin-bottom:20px;
+}
+.hero p{
+  font-size:22px;
+  max-width:700px;
+  color:#ffffffcc;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* SERVICIOS */
+.services-title{
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-size:40px;
+  font-weight:700;
+  background:linear-gradient(90deg,#1e90ff,#ffd84d);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin:60px 0 30px 0;
+}
+.services-container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  justify-content:center;
+  margin:0 20px 50px 20px;
+}
+.service-item{
+  flex:1 1 260px;
+  padding:20px 25px;
+  border-radius:25px;
+  background:rgba(0,0,0,0.85);
+  border:1px solid rgba(255,255,255,.15);
+  font-weight:500;
+  font-size:16px;
+  color:#fff;
+  backdrop-filter:blur(6px);
+  text-align:center;
+  transition:all .4s ease;
+}
+.service-item i{
+  font-size:40px;
+  margin-bottom:15px;
+  color:#1e90ff;
+}
+.service-item h3{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  margin-bottom:12px;
+  font-weight:700;
+  background:linear-gradient(90deg,#1e90ff,#ffd84d);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.service-item p{ font-size:15px; line-height:1.6; }
+.service-item:hover{
+  transform:translateY(-10px);
+  background:rgba(30,144,255,0.1);
+}
+.service-item:hover i{ transform:scale(1.2); color:#ffd84d; }
+
+/* ANIMACIONES */
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{
+    padding:15px 20px;
+  }
+  .menu-btn{display:block;}
+  nav ul{
+    position:fixed;
+    top:0;
+    left:-100%;
+    width:75%;
+    height:100vh;
+    background:#000;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:35px;
+    transition:.35s ease;
+    z-index:1001; /* debajo del botón X */
+  }
+  nav ul.active{left:0;}
+  .mobile-logo{
+    font-family:'Playfair Display',serif;
+    font-size:26px;
+    font-weight:700;
+    color:#ffd84d;
+    margin-bottom:40px;
+    list-style:none;
+  }
+  nav ul li a{ font-size:20px; }
+  .hero-title{ font-size:40px; }
+  .hero-subtitle{ font-size:28px; }
+  .hero p{ font-size:18px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <video autoplay muted playsinline>
+    <source src="ideasintro/ideasintro4.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="menu-btn" id="menuBtn">☰</div>
+  <ul id="navMenu">
+    <li class="mobile-logo">DS Steel</li>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="ceo.html">Sobre Nosotros</a></li>
+    <li><a href="proyectos.html">Proyectos y Diseños</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+     <li><a href="modelo3D.html">Modelos 3D</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="ideasintro/intro32.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <h2 class="hero-title">Construí tu futuro</h2>
+    <h3 class="hero-subtitle">Construí con DS Steel</h3>
+    <p>Calidad que dura · Velocidad que sorprende</p>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<h2 class="services-title">Servicios DS Steel Framing</h2>
+<section class="services-container">
+  <div class="service-item"><i class="fas fa-pencil-ruler"></i><h3>Diseño y Planificación</h3><p>Planos y diseños personalizados cumpliendo normativas y aprobaciones.</p></div>
+  <div class="service-item"><i class="fas fa-hard-hat"></i><h3>Ejecución de Obras</h3><p>Construcción integral con mano de obra especializada y calidad garantizada.</p></div>
+  <div class="service-item"><i class="fas fa-boxes"></i><h3>Gestión de Materiales</h3><p>Coordinación con proveedores confiables y materiales certificados.</p></div>
+  <div class="service-item"><i class="fas fa-home"></i><h3>Viviendas</h3><p>Construcción de viviendas unifamiliares y multifamiliares.</p></div>
+  <div class="service-item"><i class="fas fa-building"></i><h3>Ampliaciones y Reformas</h3><p>Ampliaciones rápidas y limpias en sistemas de construcción en seco.</p></div>
+  <div class="service-item"><i class="fas fa-warehouse"></i><h3>Galpones Industriales</h3><p>Desarrollo de galpones industriales y comerciales.</p></div>
+  <div class="service-item"><i class="fas fa-project-diagram"></i><h3>Estructuras Metálicas</h3><p>Diseño y montaje de estructuras metálicas resistentes y durables.</p></div>
+</section>
+
+<script>
+/* INTRO AUTO FADE */
+setTimeout(()=>{document.getElementById("intro").classList.add("hidden");},7000);
+
+/* MENU HAMBURGUESA FUNCIONAL */
+const menuBtn = document.getElementById('menuBtn');
+const navMenu = document.getElementById('navMenu');
+menuBtn.addEventListener('click', () => {
+  navMenu.classList.toggle('active'); // abrir/cerrar
+  menuBtn.classList.toggle('active'); // animación botón
+  menuBtn.textContent = menuBtn.classList.contains('active') ? '✕' : '☰'; // cambiar icono
+});
+</script>
+
+</body>
+</html>
