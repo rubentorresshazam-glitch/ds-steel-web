@@ -1,6 +1,7 @@
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const EMAIL_EMPRESA = process.env.EMAIL_EMPRESA;
 
 export async function handler(event) {
   try {
@@ -8,16 +9,16 @@ export async function handler(event) {
       return { statusCode: 405, body: "Método no permitido" };
     }
 
-    const { nombre, email, mensaje } = JSON.parse(event.body);
+    const { nombre, email, mensaje } = JSON.parse(event.body || "{}");
 
     if (!nombre || !email || !mensaje) {
       return { statusCode: 400, body: "Faltan datos requeridos" };
     }
 
     await resend.emails.send({
-      from: "DS Steel <onboarding@resend.dev>",  // remitente válido
-      to: process.env.EMAIL_EMPRESA,            // mail de la empresa
-      subject: `Nuevo mensaje desde la web: ${nombre}`,
+      from: EMAIL_EMPRESA,
+      to: EMAIL_EMPRESA,
+      subject: `Nuevo mensaje desde la web de DS Steel: ${nombre}`,
       html: `
         <h2>Nuevo mensaje de contacto</h2>
         <p><strong>Nombre:</strong> ${nombre}</p>
@@ -31,9 +32,8 @@ export async function handler(event) {
       statusCode: 200,
       body: JSON.stringify({ ok: true })
     };
-
-  } catch (err) {
-    console.error("Error:", err);
+  } catch (error) {
+    console.error("ERROR FUNCTION:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: "Error enviando el email" })
